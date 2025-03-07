@@ -10,7 +10,7 @@ const Header = () => {
         {/* And space-between spaces them out */}
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           {/* First element, to the left */}
-          <Typography variant="h6">Ethan Rivers - Register Component </Typography>
+          <Typography variant="h6">Ethan Rivers - Create Account Component </Typography>
           {/* Last element, to the left */}
         </Toolbar>
       </AppBar>
