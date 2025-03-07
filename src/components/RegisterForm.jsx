@@ -24,21 +24,19 @@ const RegisterForm = (props) => {
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target; // extract name and value from the event target
-
     setForm((prev) => ({
       ...prev,
-      [name]: value,
+      [e.target.name]: e.target.value,
     }));
 
     // Dynamic validation while typing
     setErrors((prev) => ({
       ...prev,
-      [name]: value.trim() === '',
-      [`${name}HelperText`]: value.trim() === '' ? `${name.charAt(0).toUpperCase() + name.slice(1)} is required` : '',
+      [e.target.name]: e.target.value.trim() === '',
+      [`${e.target.name}HelperText`]: e.target.value.trim() === '' ? 'Field Required' : '',
     }));
-    console.log(form);
-    console.log(errors);
+    //console.log(form);
+    //console.log(errors);
   };
 
   const validate = () => {
@@ -60,6 +58,14 @@ const RegisterForm = (props) => {
         newErrors[key] = true;
         newErrors[`${key}HelperText`] = 'Field Required';
       }
+
+      // Simple username validation for example purposes...
+      // You're probably going to want to do some more complex email validation here also
+      if (key === 'username' && form[key].trim().length < 5 && form[key].trim().length > 0) {
+        valid = false;
+        newErrors.username = true;
+        newErrors.usernameHelperText = 'Username must be at least 5 characters long';
+      }
     });
 
     setErrors(newErrors);
@@ -71,6 +77,7 @@ const RegisterForm = (props) => {
       return;
     }
     // handle data transfer here...
+    console.log('Form submitted:', form);
 
     // clear the form
     setForm({
